@@ -36,7 +36,7 @@ class ContrastiveLearningDataset:
                                                               self.get_simclr_pipeline_transform(96),
                                                               n_views),
                                                           download=True),
-                          'pbvs': lambda: torchvision.datasets.ImageFolder("/kaggle/input/eo_train_test_ssl/EO_train/EO_train",
+                          'pbvs': lambda: torchvision.datasets.ImageFolder("/kaggle/input/eo-train-test-ssl/EO_train/EO_train",
                                                                           transform=ContrastiveLearningViewGenerator(
                                                                           self.get_simclr_pipeline_transform(32),n_views))
                         }
