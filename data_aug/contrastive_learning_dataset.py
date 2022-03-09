@@ -4,6 +4,9 @@ from torchvision import transforms, datasets
 from data_aug.view_generator import ContrastiveLearningViewGenerator
 from exceptions.exceptions import InvalidDatasetSelection
 
+import torch
+import torchvision
+
 
 class ContrastiveLearningDataset:
     def __init__(self, root_folder):
@@ -32,7 +35,11 @@ class ContrastiveLearningDataset:
                                                           transform=ContrastiveLearningViewGenerator(
                                                               self.get_simclr_pipeline_transform(96),
                                                               n_views),
-                                                          download=True)}
+                                                          download=True),
+                          'pbvs': lambda: torchvision.datasets.ImageFolder("/kaggle/input/eo_train_test_ssl/EO_train/EO_train",
+                                                                          transform=ContrastiveLearningViewGenerator(
+                                                                          self.get_simclr_pipeline_transform(32),n_views))
+                        }
 
         try:
             dataset_fn = valid_datasets[name]
